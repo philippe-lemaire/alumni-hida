@@ -4,4 +4,5 @@ django-environ
 whitenoise
 django-crispy-forms
 crispy-bootstrap4
-
+Pillow
+django-phonenumber-field[phonenumbers]
