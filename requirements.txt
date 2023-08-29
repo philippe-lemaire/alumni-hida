@@ -1,0 +1,7 @@
+django
+django-dotenv
+django-environ
+whitenoise
+django-crispy-forms
+crispy-bootstrap4
+
