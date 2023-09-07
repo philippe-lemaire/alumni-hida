@@ -47,6 +47,7 @@ class UserManager(BaseUserManager):
 class CustomUser(AbstractUser):
     "our custom User object, that doesn't use usernames"
 
+    username = None
     USERNAME_FIELD = "email"
     email = models.EmailField(
         "Adresse email", unique=True
@@ -55,6 +56,8 @@ class CustomUser(AbstractUser):
     objects = UserManager()
 
     # our specific fields
+    first_name = models.CharField("Prénom", max_length=100, blank=True)
+    last_name = models.CharField("Nom de famille", max_length=100, blank=True)
     confirmed_account = models.BooleanField("compte confirmé", default=False)
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     photo = models.ImageField(blank=True)
