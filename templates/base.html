@@ -82,7 +82,14 @@
 
     {% endblock %}
     <div class="container">
+    {% block messages %}
+        {% if messages %}
+                {% for message in messages %}
+                <div {% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %} role="alert">{{ message }}</div>
+                {% endfor %}
 
+        {% endif %}
+    {% endblock %}
 
         {% block content %}{% endblock %}
 
