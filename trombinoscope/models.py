@@ -47,6 +47,7 @@ class UserManager(BaseUserManager):
 class CustomUser(AbstractUser):
     "our custom User object, that doesn't use usernames"
 
+    username = None
     USERNAME_FIELD = "email"
     email = models.EmailField(
         "Adresse email", unique=True
