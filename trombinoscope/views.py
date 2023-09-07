@@ -30,6 +30,6 @@ def invite_users_view(request):
             messages.success(request, f"{counter} anciens élèves invités")
 
         return HttpResponseRedirect("/")
-    else:
+    else:  # it's a get method
         context = {"form": NewAlumniForm()}
-        return render(request, "trombinoscope/invite_alumni.html", context=context)
+        return render(request, "trombinoscope/invite_users.html", context=context)

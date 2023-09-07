@@ -23,7 +23,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav mr-auto">
 
                 <li class="nav-item">
                     <a class="nav-link" href="#">Élèves</a>
@@ -35,6 +35,44 @@
                     <a class="nav-link" href="#">Contact</a>
                 </li>
                 <!--<a class="dropdown-item" href="#">Action</a>-->
+            </ul>
+
+            <!-- Staff part of the navbar -->
+            {% if user.is_staff %}
+              <ul class="navbar-nav my-2 my-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'trombinoscope:invite_users' %}">
+                        Inviter des utilisateurs
+                    </a>
+              </ul>
+            {% endif %}
+             <!-- login part of the navbar-->
+            <ul class="navbar-nav my-2 my-lg-0">
+                {% if user.is_authenticated %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {% if user.first_name or user.last_name %}
+                            {{ user.first_name }} {{user.last_name}}
+                        {% else %}
+                            {{ user.email }}
+                        {% endif %}
+                    </a>
+
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Modifier mon compte</a>
+
+                        <div class=" dropdown-divider">
+                        </div>
+                        <a class="dropdown-item" href="{% url 'simple_auth:logout' %}">Déconnexion</a>
+                    </div>
+                </li>
+                {% else %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'simple_auth:login'%}">S’identifier <span
+                            class="sr-only">(current)</span></a>
+                </li>
+                {% endif %}
             </ul>
         </div>
 

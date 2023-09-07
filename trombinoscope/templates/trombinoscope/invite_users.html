@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<form action="{% url 'trombinoscope:invite_users' %}" method="post">
+    {% csrf_token %}
+
+     {{ form|crispy }}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-right">
+                <button class="btn btn-warning btn-lg" type="submit">J’invite ces personnes</button>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}
