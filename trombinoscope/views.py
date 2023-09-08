@@ -59,7 +59,8 @@ def invite_users_view(request):
                         )
                     # create user
                     password = "changeme"
-                    user = CustomUser(email=email, password=password)
+                    user = CustomUser.objects.create_user(email, password)
+
                     # save user
                     user.save()
 
@@ -97,11 +98,16 @@ def update_profile_view(request, id):
             user.confirmed_account = True
             user.save()
             messages.success(request, message="Profil mis à jour.")
-            return HttpResponseRedirect("/")
+            redirect_uri = request.build_absolute_uri(
+                reverse("trombinoscope:update_profile", args=(id,))
+            )
+            return HttpResponseRedirect(redirect_uri)
     else:
         # instanciate the form and render the template
 
         form = UpdateProfileForm(instance=user)
         return render(
-            request, "trombinoscope/update_profile.html", {"form": form, "id": id}
+            request,
+            "trombinoscope/update_profile.html",
+            {"form": form, "id": id, "user": user},
         )
