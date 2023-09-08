@@ -4,7 +4,9 @@ from django.shortcuts import render
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.core.mail import send_mail
-from .forms import NewAlumniForm
+from django.urls import reverse
+
+from .forms import NewAlumniForm, UpdateProfileForm
 from .models import CustomUser
 
 
@@ -57,13 +59,21 @@ def invite_users_view(request):
                         )
                     # create user
                     password = "changeme"
-                    user = CustomUser(email=email, password=password)
+                    user = CustomUser.objects.create_user(email, password)
+
                     # save user
                     user.save()
+
+                    uri = request.build_absolute_uri(
+                        reverse(
+                            "trombinoscope:update_profile",
+                            args=(str(user.id),),
+                        )
+                    )
                     # send mail to user
                     send_mail(
                         subject="Vous avez été invité·e à rejoindre le trombinoscope des anciens élèves HIDA du Lycée Public de Saint-Just",
-                        message=f"Here is the message. It should contain a link to the site, that is unique. Your password is {password}",
+                        message=f"Bonjour. Un·e enseignant·e HIDA vous a invité à rejoindre le trombinoscope des anciens élèves. Voici le lien pour confirmer votre compte et compléter votre profil {uri}. It should contain a link to the site, that is unique. Your password is {password}. ",
                         from_email="from@example.com",
                         recipient_list=[email],
                         fail_silently=False,
@@ -76,3 +86,28 @@ def invite_users_view(request):
     else:  # it's a get method
         context = {"form": NewAlumniForm()}
         return render(request, "trombinoscope/invite_users.html", context=context)
+
+
+def update_profile_view(request, id):
+    user = CustomUser.objects.get(id=id)
+    if request.method == "POST":
+        # verify the form and update user, then redirect to home page
+        form = UpdateProfileForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            user.confirmed_account = True
+            user.save()
+            messages.success(request, message="Profil mis à jour.")
+            redirect_uri = request.build_absolute_uri(
+                reverse("trombinoscope:update_profile", args=(id,))
+            )
+            return HttpResponseRedirect(redirect_uri)
+    else:
+        # instanciate the form and render the template
+
+        form = UpdateProfileForm(instance=user)
+        return render(
+            request,
+            "trombinoscope/update_profile.html",
+            {"form": form, "id": id, "user": user},
+        )
