@@ -4,7 +4,7 @@
 {% block content %}
 <h1>Mettre à jour le profil</h1>
 
-<form action="{% url 'trombinoscope:update_profile' id %}" method="post">
+<form action="{% url 'trombinoscope:update_profile' id %}" method="post" enctype='multipart/form-data'>
     {% csrf_token %}
 
      {{ form|crispy }}
