@@ -1,5 +1,6 @@
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
 from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.contrib import messages
 from django.http import HttpResponseRedirect
@@ -92,11 +93,11 @@ def update_profile_view(request, id):
     user = CustomUser.objects.get(id=id)
     if request.method == "POST":
         # verify the form and update user, then redirect to home page
-        form = UpdateProfileForm(request.POST, instance=user)
+        form = UpdateProfileForm(request.POST, request.FILES, instance=user)
+        print(request.FILES)
         if form.is_valid():
-            form.save()
             user.confirmed_account = True
-            user.save()
+            form.save()
             messages.success(request, message="Profil mis à jour.")
             redirect_uri = request.build_absolute_uri(
                 reverse("trombinoscope:update_profile", args=(id,))
@@ -111,3 +112,11 @@ def update_profile_view(request, id):
             "trombinoscope/update_profile.html",
             {"form": form, "id": id, "user": user},
         )
+
+
+@login_required
+def alumni_list_view(request):
+    alumni = CustomUser.objects.filter(confirmed_account=True, enseignant_hida=False)
+    template_name = "trombinoscope/alumni_list.html"
+    context = {"alumni": alumni}
+    return render(request, template_name, context)

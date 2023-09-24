@@ -1,7 +1,6 @@
 from django.db import models
 from django.core import validators
 from phonenumber_field.modelfields import PhoneNumberField
-
 import datetime
 import uuid
 
@@ -60,7 +59,7 @@ class CustomUser(AbstractUser):
     last_name = models.CharField("Nom de famille", max_length=100, blank=True)
     confirmed_account = models.BooleanField("compte confirmé", default=False)
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    photo = models.ImageField(blank=True)
+    photo = models.ImageField(blank=True, upload_to="photos/")
     bac_year = models.PositiveIntegerField(
         "Année du bac",
         default=datetime.date.today().year,

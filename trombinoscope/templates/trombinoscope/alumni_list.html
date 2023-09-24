@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<h1>Les Anciens Élèves Histoire des Arts du Lycée de Saint-Just</h1>
+
+<div class="container">
+    <div class="row">
+
+{% for alumnus in alumni %}
+
+<div class="card m-2" style="width: 18rem;">
+  {% if alumnus.photo %}
+    <img class="card-img-top" src="media/{{alumnus.photo}}" alt="Card image cap">
+  {% endif %}
+  <div class="card-body">
+    <h5 class="card-title">{{alumnus.first_name}} {{alumnus.last_name}}</h5>
+    <p class="card-text">{{alumnus.back_year}}</p>
+    <p class="card-text">{{alumnus.get_status_display}}</p>
+    {% if alumnus.looking_for_internship %}
+        <span class="badge badge-pill badge-info">Recherche un stage</span>
+    {% endif %}
+
+
+    {% if alumnus.contact_info_instagram %}
+        <p><a href="{{alumnus.contact_info_instagram}}">Instagram</a></p>
+    {% endif %}
+    {% if alumnus.contact_info_linkedin %}
+        <p><a href="{{alumnus.contact_info_linkedin}}">Profil Linkedin</a></p>
+    {% endif %}
+    {% if alumnus.contact_info_email %}
+        <p><a href="mailto:{{alumnus.contact_info_email}}">{{alumnus.contact_info_email}}</a></p>
+    {% endif %}
+
+    {% if alumnus.contact_info_info_tel %}
+        <p><a href="{{alumnus.contact_info_tel}}" class="btn btn-primary">Tél</a></p>
+    {% endif %}
+
+  </div>
+</div>
+{% endfor %}
+    </div>
+</div>
+
+
+{% endblock %}
