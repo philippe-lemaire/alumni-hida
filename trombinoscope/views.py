@@ -7,6 +7,7 @@ from django.http import HttpResponseRedirect
 from django.core.mail import send_mail
 from django.urls import reverse
 from django.contrib.auth import login
+from django.conf import settings
 
 from .forms import NewAlumniForm, UpdateProfileForm, PasswordSetForm
 from .models import CustomUser
@@ -136,8 +137,10 @@ def update_profile_view(request, id):
         )
 
 
-class AlumniList(ListView, LoginRequiredMixin):
+class AlumniList(LoginRequiredMixin, ListView):
     paginate_by = 9
     context_object_name = "alumni"
     queryset = CustomUser.objects.filter(confirmed_account=True, is_staff=False)
     template_name = "trombinoscope/alumni_list.html"
+    login_url = settings.LOGIN_URL
+    # redirect_field_name = "trombinoscope:alumni_list"
