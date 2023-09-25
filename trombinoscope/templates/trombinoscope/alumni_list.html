@@ -20,7 +20,8 @@
     {% if alumnus.looking_for_internship %}
         <span class="badge badge-pill badge-info">Recherche un stage</span>
     {% endif %}
-    <p class="card-text">Bio : {{alumnus.bio}}</p>
+    <p class="card-text">Études : {{alumnus.post_bac}}</p>
+    <p class="card-text">Emploi : {{alumnus.occupation}}</p>
 
     {% if alumnus.contact_info_instagram %}
         <p><a target="_blank" href="{{alumnus.contact_info_instagram}}">Instagram</a></p>
