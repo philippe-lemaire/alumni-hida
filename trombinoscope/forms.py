@@ -24,6 +24,7 @@ class UpdateProfileForm(ModelForm):
             "photo",
             "bac_year",
             "status",
+            "bio",
             "contact_info_instagram",
             "contact_info_email",
             "contact_info_linkedin",
