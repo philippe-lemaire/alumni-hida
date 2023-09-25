@@ -61,7 +61,7 @@
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{% url 'trombinoscope:update_profile' user.id %}">Modifier mon compte</a>
-
+                        <a class="dropdown-item" href="{% url 'simple_auth:update_password' %}">Modifier mon mot de passe</a>
                         <div class=" dropdown-divider">
                         </div>
                         <a class="dropdown-item" href="{% url 'simple_auth:logout' %}">Déconnexion</a>
