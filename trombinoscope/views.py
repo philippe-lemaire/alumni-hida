@@ -1,6 +1,6 @@
 from django.views.generic import TemplateView, ListView
 from django.contrib.admin.views.decorators import staff_member_required
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.contrib import messages
 from django.http import HttpResponseRedirect
@@ -114,9 +114,12 @@ def update_profile_view(request, id):
         )
 
 
-@login_required
-def alumni_list_view(request):
-    alumni = CustomUser.objects.filter(confirmed_account=True, enseignant_hida=False)
+class AlumniList(ListView, LoginRequiredMixin):
+    model = CustomUser
+    paginate_by = 20
     template_name = "trombinoscope/alumni_list.html"
-    context = {"alumni": alumni}
-    return render(request, template_name, context)
+
+    def get_context_data(self, **kwargs):
+        alumni = CustomUser.objects.filter(confirmed_account=True)
+        context = {"alumni": alumni}
+        return context
