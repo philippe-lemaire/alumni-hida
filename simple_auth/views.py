@@ -17,9 +17,9 @@ def login_request(request):
                 messages.info(request, f"Bienvenue, {user.first_name}.")
                 return redirect("/")
             else:
-                messages.error(request, "Nom d'utilisateur ou mot de passe invalide.")
+                messages.error(request, "Email ou mot de passe invalide.")
         else:
-            messages.error(request, "Nom d'utilisateur ou mot de passe invalide.")
+            messages.error(request, "Email ou mot de passe invalide.")
     form = AuthenticationForm()
     return render(
         request=request,
