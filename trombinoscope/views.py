@@ -6,8 +6,9 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.core.mail import send_mail
 from django.urls import reverse
+from django.contrib.auth import login
 
-from .forms import NewAlumniForm, UpdateProfileForm
+from .forms import NewAlumniForm, UpdateProfileForm, PasswordSetForm
 from .models import CustomUser
 
 
@@ -67,7 +68,7 @@ def invite_users_view(request):
 
                     uri = request.build_absolute_uri(
                         reverse(
-                            "trombinoscope:update_profile",
+                            "trombinoscope:set_password",
                             args=(str(user.id),),
                         )
                     )
@@ -87,6 +88,27 @@ def invite_users_view(request):
     else:  # it's a get method
         context = {"form": NewAlumniForm()}
         return render(request, "trombinoscope/invite_users.html", context=context)
+
+
+def password_set_view(request, id):
+    user = CustomUser.objects.get(id=id)
+    if request.method == "POST":
+        form = PasswordSetForm(request.POST)
+        if form.is_valid():
+            password = form.cleaned_data["password"]
+
+            user.set_password(password)
+            user.confirmed_account = True
+            user.save()
+            messages.success(request, "Mot de passe enregistré.")
+            login(request, user)
+            messages.success(request, "Vous êtes identifié·e.")
+            return HttpResponseRedirect("/")
+    else:
+        form = PasswordSetForm()
+        return render(
+            request, "trombinoscope/set_password.html", context={"form": form, "id": id}
+        )
 
 
 def update_profile_view(request, id):

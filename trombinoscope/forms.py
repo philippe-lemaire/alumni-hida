@@ -30,3 +30,7 @@ class UpdateProfileForm(ModelForm):
             "contact_info_linkedin",
             "contact_info_tel",
         ]
+
+
+class PasswordSetForm(forms.Form):
+    password = forms.CharField(widget=forms.PasswordInput)
