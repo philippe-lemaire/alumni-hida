@@ -23,17 +23,17 @@
     <p class="card-text">Bio : {{alumnus.bio}}</p>
 
     {% if alumnus.contact_info_instagram %}
-        <p><a href="{{alumnus.contact_info_instagram}}">Instagram</a></p>
+        <p><a target="_blank" href="{{alumnus.contact_info_instagram}}">Instagram</a></p>
     {% endif %}
     {% if alumnus.contact_info_linkedin %}
-        <p><a href="{{alumnus.contact_info_linkedin}}">Profil Linkedin</a></p>
+        <p><a target="_blank" href="{{alumnus.contact_info_linkedin}}">Profil Linkedin</a></p>
     {% endif %}
     {% if alumnus.contact_info_email %}
         <p><a href="mailto:{{alumnus.contact_info_email}}">{{alumnus.contact_info_email}}</a></p>
     {% endif %}
 
-    {% if alumnus.contact_info_info_tel %}
-        <p><a href="{{alumnus.contact_info_tel}}" class="btn btn-primary">Tél</a></p>
+    {% if alumnus.contact_info_tel %}
+    <button type="button" class="btn btn-info">{{alumnus.contact_info_tel}}</button>
     {% endif %}
 
   </div>
