@@ -23,17 +23,17 @@
     <p class="card-text">Bio : {{alumnus.bio}}</p>
 
     {% if alumnus.contact_info_instagram %}
-        <p><a href="{{alumnus.contact_info_instagram}}">Instagram</a></p>
+        <p><a target="_blank" href="{{alumnus.contact_info_instagram}}">Instagram</a></p>
     {% endif %}
     {% if alumnus.contact_info_linkedin %}
-        <p><a href="{{alumnus.contact_info_linkedin}}">Profil Linkedin</a></p>
+        <p><a target="_blank" href="{{alumnus.contact_info_linkedin}}">Profil Linkedin</a></p>
     {% endif %}
     {% if alumnus.contact_info_email %}
         <p><a href="mailto:{{alumnus.contact_info_email}}">{{alumnus.contact_info_email}}</a></p>
     {% endif %}
 
-    {% if alumnus.contact_info_info_tel %}
-        <p><a href="{{alumnus.contact_info_tel}}" class="btn btn-primary">Tél</a></p>
+    {% if alumnus.contact_info_tel %}
+    <button type="button" class="btn btn-info">{{alumnus.contact_info_tel}}</button>
     {% endif %}
 
   </div>
@@ -42,5 +42,29 @@
     </div>
 </div>
 
+{% if page_obj.paginator.num_pages > 1 %}
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    {% if page_obj.has_previous %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    {% endif %}
+    {% for _ in ''|ljust:page_obj.paginator.num_pages %}
+    <a class="page-link" href="?page={{ forloop.counter }}">{{ forloop.counter }}</a>
+    {% endfor %}
 
+
+    {% if page_obj.has_next %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+    {% endif %}
+  </ul>
+</nav>
+{% endif %}
 {% endblock %}
