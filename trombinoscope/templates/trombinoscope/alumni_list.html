@@ -15,12 +15,12 @@
   {% endif %}
   <div class="card-body">
     <h5 class="card-title">{{alumnus.first_name}} {{alumnus.last_name}}</h5>
-    <p class="card-text">{{alumnus.back_year}}</p>
-    <p class="card-text">{{alumnus.get_status_display}}</p>
+    <p class="card-text">Bac {{alumnus.bac_year}}</p>
+    <p class="card-text">Statut pro : {{alumnus.get_status_display}}</p>
     {% if alumnus.looking_for_internship %}
         <span class="badge badge-pill badge-info">Recherche un stage</span>
     {% endif %}
-
+    <p class="card-text">Bio : {{alumnus.bio}}</p>
 
     {% if alumnus.contact_info_instagram %}
         <p><a href="{{alumnus.contact_info_instagram}}">Instagram</a></p>

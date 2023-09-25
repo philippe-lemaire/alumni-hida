@@ -75,8 +75,9 @@ class CustomUser(AbstractUser):
     status = models.CharField(
         "Statut", max_length=2, choices=STATUS_CHOICES, default="ET"
     )
-    looking_for_internship = models.BooleanField("En recherche de stage", default=False)
-    enseignant_hida = models.BooleanField(default=False)
+    # looking_for_internship = models.BooleanField("En recherche de stage", default=False)
+    # enseignant_hida = models.BooleanField(default=False)
+    bio = models.TextField("Biographie", max_length=1000, blank=True)
     contact_info_instagram = models.URLField("Compte instagram", blank=True)
     contact_info_email = models.EmailField(
         "Adresse email de contact",
