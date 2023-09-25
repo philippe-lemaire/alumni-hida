@@ -117,5 +117,5 @@ def update_profile_view(request, id):
 class AlumniList(ListView, LoginRequiredMixin):
     paginate_by = 9
     context_object_name = "alumni"
-    queryset = CustomUser.objects.filter(confirmed_account=True)
+    queryset = CustomUser.objects.filter(confirmed_account=True, is_staff=False)
     template_name = "trombinoscope/alumni_list.html"
