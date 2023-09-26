@@ -10,8 +10,16 @@ from django.urls import reverse
 from django.contrib.auth import login
 from django.conf import settings
 from django.db.models import Q
+from django.core.mail import EmailMessage
 
-from .forms import NewAlumniForm, UpdateProfileForm, PasswordSetForm, SearchForm
+
+from .forms import (
+    NewAlumniForm,
+    UpdateProfileForm,
+    PasswordSetForm,
+    SearchForm,
+    ContactForm,
+)
 from .models import CustomUser
 
 
@@ -22,6 +30,29 @@ class IndexView(TemplateView):
         context = super(TemplateView, self).get_context_data(**kwargs)
         context["search_form"] = SearchForm(self.request.GET or None)
         return context
+
+
+def contact_view(request):
+    template_name = "trombinoscope/contact.html"
+    search_form = SearchForm(request.GET or None)
+    if request.method == "POST":
+        contact_form = ContactForm(request.POST)
+        if contact_form.is_valid():
+            form_user_email = contact_form.cleaned_data["email"]
+            message = contact_form.cleaned_data["message"]
+            email = EmailMessage(
+                subject="Formulaire de contact du site annuaire HIDA",
+                body=f"De : {form_user_email}\n\n{message}",
+                from_email="from@example.com",
+                to=[settings.CONTACT_EMAIL],
+                reply_to=[form_user_email],
+            )
+            email.send()
+            messages.success(request, "Votre message a été envoyé.")
+            return HttpResponseRedirect("/")
+    else:
+        context = {"search_form": search_form, "contact_form": ContactForm()}
+        return render(request, template_name, context)
 
 
 @staff_member_required

@@ -43,5 +43,12 @@ class SearchForm(forms.Form):
     search_term = forms.CharField(
         label="",
         max_length=200,
-        widget=forms.TextInput(attrs={"placeholder": "Ex: École du Louvre"}),
+        widget=forms.TextInput(attrs={"placeholder": "Une école, un nom…"}),
+    )
+
+
+class ContactForm(forms.Form):
+    email = forms.EmailField(label="Votre email :", max_length=200)
+    message = forms.CharField(
+        label="Votre message :", max_length=200, widget=forms.Textarea()
     )

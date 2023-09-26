@@ -13,4 +13,5 @@ urlpatterns = [
     path("alumni/search_result", views.alumni_search_result, name="search"),
     path("update_profile", views.update_profile_view, name="update_profile"),
     path("set_password/<id>/", views.password_set_view, name="set_password"),
+    path("contact", views.contact_view, name="contact"),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
