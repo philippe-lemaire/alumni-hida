@@ -18,6 +18,11 @@ from .models import CustomUser
 class IndexView(TemplateView):
     template_name = "trombinoscope/index.html"
 
+    def get_context_data(self, **kwargs):
+        context = super(TemplateView, self).get_context_data(**kwargs)
+        context["search_form"] = SearchForm(self.request.GET or None)
+        return context
+
 
 @staff_member_required
 def invite_users_view(request):
@@ -105,7 +110,9 @@ def password_set_view(request, id):
             user.save()
             messages.success(request, "Mot de passe enregistré.")
             login(request, user)
-            messages.success(request, "Vous êtes identifié·e.")
+            messages.success(
+                request, "Vous êtes identifié·e. Pensez à compléter votre profil."
+            )
             return HttpResponseRedirect("/")
     else:
         form = PasswordSetForm()
@@ -114,8 +121,8 @@ def password_set_view(request, id):
         )
 
 
-def update_profile_view(request, id):
-    user = CustomUser.objects.get(id=id)
+def update_profile_view(request):
+    user = request.user
     if request.method == "POST":
         # verify the form and update user, then redirect to home page
         form = UpdateProfileForm(request.POST, request.FILES, instance=user)
@@ -125,7 +132,7 @@ def update_profile_view(request, id):
             form.save()
             messages.success(request, message="Profil mis à jour.")
             redirect_uri = request.build_absolute_uri(
-                reverse("trombinoscope:update_profile", args=(id,))
+                reverse("trombinoscope:update_profile")
             )
             return HttpResponseRedirect(redirect_uri)
     else:
@@ -135,7 +142,7 @@ def update_profile_view(request, id):
         return render(
             request,
             "trombinoscope/update_profile.html",
-            {"form": form, "id": id, "user": user},
+            {"form": form, "user": user},
         )
 
 
@@ -148,7 +155,7 @@ class AlumniList(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super(ListView, self).get_context_data(**kwargs)
-        context["form"] = SearchForm(self.request.GET or None)
+        context["search_form"] = SearchForm(self.request.GET or None)
         return context
 
 
@@ -168,7 +175,7 @@ def alumni_search_result(request):
                 | Q(last_name__contains=term)
             )
 
-            context = {"alumni": queryset, "form": form}
+            context = {"alumni": queryset, "search_form": form}
             template_name = "trombinoscope/alumni_list.html"
             return render(request, template_name, context)
     else:

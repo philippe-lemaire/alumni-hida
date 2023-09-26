@@ -41,7 +41,7 @@ class PasswordSetForm(forms.Form):
 
 class SearchForm(forms.Form):
     search_term = forms.CharField(
-        label="Recherchez un·e ancien·ne élève",
+        label="",
         max_length=200,
         widget=forms.TextInput(attrs={"placeholder": "Ex: École du Louvre"}),
     )
