@@ -2,8 +2,6 @@ from django import forms
 from django.contrib.auth.forms import UserChangeForm
 from django.forms import ModelForm
 from .models import CustomUser
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Fieldset, Submit
 
 
 class NewAlumniForm(forms.Form):
