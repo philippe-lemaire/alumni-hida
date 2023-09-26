@@ -5,14 +5,7 @@
 {% block content %}
 <h1>Les Anciens Élèves Histoire des Arts du Lycée de Saint-Just</h1>
 
-<form class="form-inline" action="{% url 'trombinoscope:search' %}" method="post">
-    {% csrf_token %}
-    <div class="form-group mb-2 mx-sm-3">
-    {{ form|crispy }}
-    </div>
 
-    <button class="btn btn-info mb-2" type="submit">rechercher</button>
-</form>
 
 
 <div class="container">
