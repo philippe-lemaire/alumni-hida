@@ -2,6 +2,8 @@ from django import forms
 from django.contrib.auth.forms import UserChangeForm
 from django.forms import ModelForm
 from .models import CustomUser
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Fieldset, Submit
 
 
 class NewAlumniForm(forms.Form):
@@ -35,3 +37,11 @@ class UpdateProfileForm(ModelForm):
 
 class PasswordSetForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput)
+
+
+class SearchForm(forms.Form):
+    search_term = forms.CharField(
+        label="Recherchez un·e ancien·ne élève",
+        max_length=200,
+        widget=forms.TextInput(attrs={"placeholder": "Ex: École du Louvre"}),
+    )

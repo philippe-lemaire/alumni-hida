@@ -1,17 +1,30 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 {% load static %}
 
 {% block content %}
 <h1>Les Anciens Élèves Histoire des Arts du Lycée de Saint-Just</h1>
 
+<form class="form-inline" action="{% url 'trombinoscope:search' %}" method="post">
+    {% csrf_token %}
+    <div class="form-group mb-2 mx-sm-3">
+    {{ form|crispy }}
+    </div>
+
+    <button class="btn btn-info mb-2" type="submit">rechercher</button>
+</form>
+
+
 <div class="container">
+
+
     <div class="row">
 
 {% for alumnus in alumni %}
 
 <div class="card m-2" style="width: 18rem;">
   {% if alumnus.photo %}
-    <img class="card-img-top" src="media/{{alumnus.photo}}" alt="Card image cap">
+    <img class="card-img-top" src="{% get_media_prefix %}/{{alumnus.photo}}" alt="Card image cap">
   {% endif %}
   <div class="card-body">
     <h5 class="card-title">{{alumnus.first_name}} {{alumnus.last_name}}</h5>

@@ -1,6 +1,7 @@
 from django.views.generic import TemplateView, ListView
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.contrib import messages
 from django.http import HttpResponseRedirect
@@ -8,8 +9,9 @@ from django.core.mail import send_mail
 from django.urls import reverse
 from django.contrib.auth import login
 from django.conf import settings
+from django.db.models import Q
 
-from .forms import NewAlumniForm, UpdateProfileForm, PasswordSetForm
+from .forms import NewAlumniForm, UpdateProfileForm, PasswordSetForm, SearchForm
 from .models import CustomUser
 
 
@@ -143,4 +145,31 @@ class AlumniList(LoginRequiredMixin, ListView):
     queryset = CustomUser.objects.filter(confirmed_account=True, is_staff=False)
     template_name = "trombinoscope/alumni_list.html"
     login_url = settings.LOGIN_URL
-    # redirect_field_name = "trombinoscope:alumni_list"
+
+    def get_context_data(self, **kwargs):
+        context = super(ListView, self).get_context_data(**kwargs)
+        context["form"] = SearchForm(self.request.GET or None)
+        return context
+
+
+@login_required
+def alumni_search_result(request):
+    if request.method == "POST":
+        form = SearchForm(request.POST)
+        if form.is_valid():
+            term = form.cleaned_data["search_term"]
+
+            queryset = CustomUser.objects.filter(
+                confirmed_account=True, is_staff=False
+            ).filter(
+                Q(post_bac__contains=term)
+                | Q(occupation__contains=term)
+                | Q(first_name__contains=term)
+                | Q(last_name__contains=term)
+            )
+
+            context = {"alumni": queryset, "form": form}
+            template_name = "trombinoscope/alumni_list.html"
+            return render(request, template_name, context)
+    else:
+        return HttpResponseRedirect("/")
