@@ -28,21 +28,25 @@
     {% endif %}
     <p class="card-text">Études : {{alumnus.post_bac}}</p>
     <p class="card-text">Emploi : {{alumnus.occupation}}</p>
-
     {% if alumnus.contact_info_instagram %}
-        <p><a target="_blank" href="{{alumnus.contact_info_instagram}}">Instagram</a></p>
+    <p><a target="_blank" href="{{alumnus.contact_info_instagram}}">Instagram</a></p>
     {% endif %}
     {% if alumnus.contact_info_linkedin %}
-        <p><a target="_blank" href="{{alumnus.contact_info_linkedin}}">Profil Linkedin</a></p>
+    <p><a target="_blank" href="{{alumnus.contact_info_linkedin}}">Profil Linkedin</a></p>
     {% endif %}
     {% if alumnus.contact_info_email %}
-        <p><a href="mailto:{{alumnus.contact_info_email}}">{{alumnus.contact_info_email}}</a></p>
+    <p><a href="mailto:{{alumnus.contact_info_email}}">{{alumnus.contact_info_email}}</a></p>
     {% endif %}
-
     {% if alumnus.contact_info_tel %}
-    <button type="button" class="btn btn-info">{{alumnus.contact_info_tel}}</button>
+    <p><button type="button" class="btn btn-light">{{ alumnus.contact_info_tel }}</button></p>
     {% endif %}
-
+    {% if user.is_staff %}
+    <p>
+        <a href="{% url 'trombinoscope:staff_edit_profile' alumnus.id %}"
+        class="btn btn-danger btn-sm active" role="button"
+        aria-pressed="true">Modifier ce profil</a>
+    </p>
+    {% endif %}
   </div>
 </div>
 {% endfor %}
