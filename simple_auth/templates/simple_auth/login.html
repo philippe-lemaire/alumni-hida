@@ -6,11 +6,16 @@
 <!--Login-->
 <div class="container py-5">
     <h1>Identification</h1>
-    <form method="POST">
-        {% csrf_token %}
-        {{ login_form|crispy }}
-        <button class="btn btn-primary" type="submit">S'identifier</button>
-    </form>
+
+        <div class="card">
+            <div class="card-body">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ login_form|crispy }}
+                    <button class="btn btn-primary" type="submit">S'identifier</button>
+                </form>
+            </div>
+        </div>
     <br>
     <p><a href="{% url 'simple_auth:reset_password' %}">Mot de passe oublié ?</a></p>
     <p>Vous n’avez pas encore de compte ? Ce site est réservé aux anciens élèves de spécialité Histoire des Arts du Lycée de Saint-Just à Lyon. L’inscription se fait uniquement par invitation de l’équipe enseignante.</p>
