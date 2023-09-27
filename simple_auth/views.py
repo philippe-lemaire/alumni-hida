@@ -1,9 +1,14 @@
 from django.shortcuts import render, redirect
-from .forms import NewUserForm
+from .forms import PasswordResetForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import views as auth_views
+from trombinoscope.models import CustomUser
+from django.urls import reverse
+from django.core.mail import send_mail
+from django.http import HttpResponseRedirect
+from django.conf import settings
 
 
 def login_request(request):
@@ -40,8 +45,41 @@ class PasswordChangeView(auth_views.PasswordChangeView):
     success_url = "/"
 
 
-class PasswordResetView(auth_views.PasswordResetView):
+def password_reset_view(request):
     template_name = "simple_auth/reset-password.html"
+    if request.method == "POST":
+        form = PasswordResetForm(request.POST)
+        if form.is_valid():
+            # check if there is a user with this email
+            email = form.cleaned_data["email"]
+            try:
+                user = CustomUser.objects.get(email=email)
+
+                uri = request.build_absolute_uri(
+                    reverse(
+                        "trombinoscope:set_password",
+                        args=(str(user.id),),
+                    )
+                )
+                # send mail to user
+                send_mail(
+                    subject="Réinitialisation de mot de passe sur le trombinoscope des élèves HIDA du Lycée Public de Saint-Just",
+                    message=f"Vous avez demandé à réinitialiser votre mot de passe sur le trombinoscope des élèves HIDA du Lycée Public de Saint-Just.\nVoici le lien pour modifier votre mot de passe {uri}. ",
+                    from_email="from@example.com",
+                    recipient_list=[email],
+                    fail_silently=False,
+                )
+                messages.success(request, "Email envoyé")
+                return HttpResponseRedirect("/")
+
+            # if not, write a message and redirect to this same url in get
+            except:
+                messages.warning(request, "Aucun compte enregistré avec cet email.")
+                return render(request, template_name, {"form": form})
+    else:
+        form = PasswordResetForm()
+        context = {"form": form}
+        return render(request, template_name, context)
 
 
 class PasswordResetConfirmView(auth_views.PasswordResetConfirmView):
