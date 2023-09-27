@@ -30,3 +30,7 @@ class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = CustomUser
         fields = ("email",)
+
+
+class PasswordResetForm(forms.Form):
+    email = forms.EmailField(label="Email", max_length=200)
