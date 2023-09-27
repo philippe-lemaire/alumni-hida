@@ -157,7 +157,6 @@ def update_profile_view(request):
     if request.method == "POST":
         # verify the form and update user, then redirect to home page
         form = UpdateProfileForm(request.POST, request.FILES, instance=user)
-        print(request.FILES)
         if form.is_valid():
             user.confirmed_account = True
             form.save()
@@ -211,3 +210,28 @@ def alumni_search_result(request):
             return render(request, template_name, context)
     else:
         return HttpResponseRedirect("/")
+
+
+@staff_member_required
+def staff_edit_profile(request, id):
+    user = CustomUser.objects.get(id=id)
+
+    if request.method == "POST":
+        # verify the form and update user, then redirect to home page
+        form = UpdateProfileForm(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            user.confirmed_account = True
+            form.save()
+            messages.success(request, message="Profil mis à jour.")
+            redirect_uri = request.build_absolute_uri(
+                reverse("trombinoscope:alumni_list")
+            )
+            return HttpResponseRedirect(redirect_uri)
+    else:
+        # instanciate the form and render the template
+        form = UpdateProfileForm(instance=user)
+        return render(
+            request,
+            "trombinoscope/staff_update_profile.html",
+            {"form": form, "id": id},
+        )
