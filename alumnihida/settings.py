@@ -32,6 +32,7 @@ ALLOWED_HOSTS = [
     "localhost",
     "alumni-hida.org",
     "www.alumni-hida.org",
+    "vps-41427151.vps.ovh.net",
 ]
 
 # Application definition
