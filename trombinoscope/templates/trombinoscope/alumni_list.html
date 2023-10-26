@@ -17,7 +17,7 @@
 
 <div class="card m-2" style="width: 18rem;">
   {% if alumnus.photo %}
-    <img class="card-img-top" src="{% get_media_prefix %}/{{alumnus.photo}}" alt="Portrait de {{ alumnus.first_name }} {{ alumnus.last_name }}">
+    <img class="card-img-top" src="{% get_media_prefix %}{{alumnus.photo}}" alt="Portrait de {{ alumnus.first_name }} {{ alumnus.last_name }}">
   {% else %}
     <img class="card-img-top" src="{% static 'trombinoscope/photos/default.webp' %}" alt="Card image cap">
   {% endif %}
