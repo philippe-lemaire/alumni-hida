@@ -19,6 +19,7 @@ urlpatterns = [
     ),
     path("set_password/<id>/", views.password_set_view, name="set_password"),
     path("contact", views.contact_view, name="contact"),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]
+# + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
