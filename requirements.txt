@@ -6,3 +6,4 @@ django-crispy-forms
 crispy-bootstrap4
 Pillow
 django-phonenumber-field[phonenumbers]
+gunicorn
