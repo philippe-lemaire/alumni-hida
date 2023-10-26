@@ -42,16 +42,7 @@
             <!-- search bar-->
             {% if user.is_authenticated and search_form %}
             {% load crispy_forms_tags %}
-
-
-            <form action="{% url 'trombinoscope:search' %}" method="post">
-                 {% csrf_token %}
-
-                 {{ search_form }}
-                <button class="btn" type="submit">🔍</button>
-
-            </form>
-      </form>
+            {% crispy search_form search_form.helper %}
             {% endif %}
             <!-- Staff part of the navbar -->
             {% if user.is_staff %}
