@@ -17,6 +17,8 @@
 
 
     {% block navbar %}
+
+
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="/">Accueil</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
@@ -40,10 +42,14 @@
             <!-- search bar-->
             {% if user.is_authenticated and search_form %}
             {% load crispy_forms_tags %}
-            <form class="d-flex" action="{% url 'trombinoscope:search' %}" method="post">
+
+
+            <form action="{% url 'trombinoscope:search' %}" method="post">
                  {% csrf_token %}
+
                  {{ search_form }}
-            <button class="btn btn-outline-success" type="submit">Rechercher</button>
+                <button class="btn" type="submit">🔍</button>
+
             </form>
       </form>
             {% endif %}
@@ -89,6 +95,7 @@
 
 
     </nav>
+
     <br>
 
     {% endblock %}
