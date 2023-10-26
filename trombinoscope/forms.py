@@ -2,6 +2,8 @@ from django import forms
 from django.contrib.auth.forms import UserChangeForm
 from django.forms import ModelForm
 from .models import CustomUser
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit
 
 
 class NewAlumniForm(forms.Form):
@@ -41,8 +43,15 @@ class SearchForm(forms.Form):
     search_term = forms.CharField(
         label="",
         max_length=200,
-        widget=forms.TextInput(attrs={"placeholder": "Une école, un nom…"}),
+        widget=forms.TextInput(attrs={"placeholder": "Recherchez…"}),
     )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_method = "post"
+        self.helper.form_action = "trombinoscope:search"
+        # self.helper.add_input(Submit("submit", "Submit"))
 
 
 class ContactForm(forms.Form):
