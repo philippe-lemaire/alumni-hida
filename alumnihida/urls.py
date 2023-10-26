@@ -16,12 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.conf.urls.static import static
-from django.conf import settings
-from simple_auth.views import PasswordResetConfirmView
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("trombinoscope.urls")),
     path("authentification/", include("simple_auth.urls")),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
