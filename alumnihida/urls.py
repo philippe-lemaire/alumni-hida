@@ -18,11 +18,17 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("trombinoscope.urls")),
     path("authentification/", include("simple_auth.urls")),
+    path(
+        "mentions-legales",
+        TemplateView.as_view(template_name="mentions_legales.html"),
+        name="mentions-legales",
+    ),
 ]
 
 if settings.DEBUG:
