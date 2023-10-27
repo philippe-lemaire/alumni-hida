@@ -19,7 +19,7 @@
   {% if alumnus.photo %}
     <img class="card-img-top" src="{% get_media_prefix %}{{alumnus.photo}}" alt="Portrait de {{ alumnus.first_name }} {{ alumnus.last_name }}">
   {% else %}
-    <img class="card-img-top" src="{% static 'trombinoscope/photos/default.webp' %}" alt="Card image cap">
+    <img class="card-img-top" src="{% static 'trombinoscope/icons/classmates.png' %}" alt="Image par défaut représentant des étudiants">
   {% endif %}
   <div class="card-body">
     <h5 class="card-title">{{alumnus.first_name}} {{alumnus.last_name}}</h5>
@@ -28,19 +28,23 @@
     {% if alumnus.looking_for_internship %}
         <span class="badge badge-pill badge-info">Recherche un stage</span>
     {% endif %}
+    {% if alumnus.post_bac %}
     <p class="card-text">Études : {{alumnus.post_bac}}</p>
+    {% endif %}
+    {% if alumnus.occupation %}
     <p class="card-text">Emploi : {{alumnus.occupation}}</p>
+    {% endif %}
     {% if alumnus.contact_info_instagram %}
-    <p><a target="_blank" href="{{alumnus.contact_info_instagram}}">Instagram</a></p>
+    <p><img src="{% static 'trombinoscope/icons/instagram.png' %}" alt="Logo Instagram"> <a target="_blank" href="{{alumnus.contact_info_instagram}}">Instagram</a></p>
     {% endif %}
     {% if alumnus.contact_info_linkedin %}
-    <p><a target="_blank" href="{{alumnus.contact_info_linkedin}}">Profil Linkedin</a></p>
+    <p><img src="{% static 'trombinoscope/icons/linkedin.png' %}" alt="Logo Linkedin"> <a target="_blank" href="{{alumnus.contact_info_linkedin}}">Linkedin</a></p>
     {% endif %}
     {% if alumnus.contact_info_email %}
-    <p><a href="mailto:{{alumnus.contact_info_email}}">{{alumnus.contact_info_email}}</a></p>
+    <p><img src="{% static 'trombinoscope/icons/envelope.png' %}" alt="Logo Enveloppe"> <a href="mailto:{{alumnus.contact_info_email}}">{{alumnus.contact_info_email}}</a></p>
     {% endif %}
     {% if alumnus.contact_info_tel %}
-    <p><button type="button" class="btn btn-light">{{ alumnus.contact_info_tel }}</button></p>
+    <p><img src="{% static 'trombinoscope/icons/smartphone.png' %}" alt="Logo Smartphone"> {{ alumnus.contact_info_tel }}</p>
     {% endif %}
     {% if user.is_staff %}
     <p>
