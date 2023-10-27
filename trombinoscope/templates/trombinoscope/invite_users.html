@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
-
+{% block title %}Inviter des anciens élèves{% endblock title %}
 {% block content %}
 <form action="{% url 'trombinoscope:invite_users' %}" method="post">
     {% csrf_token %}
