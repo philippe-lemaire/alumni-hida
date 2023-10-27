@@ -71,10 +71,13 @@
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{% url 'trombinoscope:update_profile' %}">Compléter mon profil</a>
                         <a class="dropdown-item" href="{% url 'simple_auth:update_password' %}">Modifier mon mot de passe</a>
-                        <div class=" dropdown-divider">
-                        </div>
+                        {% if not user.is_staff %}
+                        <a class="dropdown-item" href="{% url 'trombinoscope:update_profile' %}">Compléter mon profil</a>
+                        <div class=" dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'trombinoscope:pre_delete_profile' %}">Supprimer mon profil</a>
+                        {% endif %}
+                        <div class=" dropdown-divider"></div>
                         <a class="dropdown-item" href="{% url 'simple_auth:logout' %}">Déconnexion</a>
                     </div>
                 </li>
