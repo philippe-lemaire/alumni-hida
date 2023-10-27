@@ -15,7 +15,7 @@
 
 {% for alumnus in alumni %}
 
-<div class="card m-2" style="width: 18rem;">
+<div class="card m-4" style="width: 18rem;">
   {% if alumnus.photo %}
     <img class="card-img-top" src="{% get_media_prefix %}{{alumnus.photo}}" alt="Portrait de {{ alumnus.first_name }} {{ alumnus.last_name }}">
   {% else %}
@@ -49,8 +49,8 @@
     {% if user.is_staff %}
     <p>
         <a href="{% url 'trombinoscope:staff_edit_profile' alumnus.id %}"
-        class="btn btn-danger btn-sm active" role="button"
-        aria-pressed="true">Modifier ce profil</a>
+        class="btn btn-secondary btn-sm active" role="button"
+        aria-pressed="true">Staff : Modifier ce profil</a>
     </p>
     {% endif %}
   </div>
