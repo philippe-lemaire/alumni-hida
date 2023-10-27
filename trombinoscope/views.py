@@ -167,8 +167,6 @@ def update_profile_view(request):
                 reverse("trombinoscope:update_profile")
             )
             return HttpResponseRedirect(redirect_uri)
-        elif form.errors:
-            print(form.errors)
     return render(
         request,
         "trombinoscope/update_profile.html",
