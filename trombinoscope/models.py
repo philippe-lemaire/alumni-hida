@@ -100,10 +100,10 @@ class CustomUser(AbstractUser):
     # enseignant_hida = models.BooleanField(default=False)
     post_bac = models.TextField("Études après le Bac", max_length=1000, blank=True)
     occupation = models.TextField("Emploi", max_length=1000, blank=True)
-    contact_info_instagram = models.URLField("Compte instagram", blank=True)
+    contact_info_instagram = models.URLField("Adresse compte instagram", blank=True)
     contact_info_email = models.EmailField(
         "Adresse email de contact",
         blank=True,
     )
     contact_info_linkedin = models.URLField("Adresse profil linkedin", blank=True)
-    contact_info_tel = PhoneNumberField(blank=True, region="FR")
+    contact_info_tel = PhoneNumberField("Numéro de téléphone", blank=True, region="FR")
