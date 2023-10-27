@@ -115,7 +115,7 @@ def invite_users_view(request):
                     send_mail(
                         subject="Vous avez été invité·e à rejoindre le trombinoscope des anciens élèves HIDA du Lycée Public de Saint-Just",
                         message=f"Bonjour. Un·e enseignant·e HIDA vous a invité à rejoindre le trombinoscope des anciens élèves. Voici le lien pour confirmer votre compte et compléter votre profil {uri}. ",
-                        from_email="from@example.com",
+                        from_email=settings.EMAIL_FROM,
                         recipient_list=[email],
                         fail_silently=False,
                     )

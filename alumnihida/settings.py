@@ -150,10 +150,11 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # for email sending
-EMAIL_HOST = os.getenv("EMAIL_HOST")
-EMAIL_PORT = os.getenv("EMAIL_PORT")
-EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+EMAIL_HOST = os.getenv("ELASTIC_HOST")
+EMAIL_PORT = os.getenv("ELASTIC_PORT")
+EMAIL_HOST_USER = os.getenv("ELASTIC_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("ELASTIC_HOST_PASSWORD")
 EMAIL_USE_TLS = True
 CONTACT_EMAIL = os.getenv("EMAIL_CONTACT")
+EMAIL_FROM = os.getenv("ELASTIC_FROM")
 LOGIN_URL = "authentification/identification"
