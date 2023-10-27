@@ -154,26 +154,26 @@ def password_set_view(request, id):
 
 def update_profile_view(request):
     user = request.user
+    form = UpdateProfileForm(request.POST or None, request.FILES or None, instance=user)
+
     if request.method == "POST":
         # verify the form and update user, then redirect to home page
-        form = UpdateProfileForm(request.POST, request.FILES, instance=user)
         if form.is_valid():
             user.confirmed_account = True
             form.save()
             messages.success(request, message="Profil mis à jour.")
+
             redirect_uri = request.build_absolute_uri(
                 reverse("trombinoscope:update_profile")
             )
             return HttpResponseRedirect(redirect_uri)
-    else:
-        # instanciate the form and render the template
-
-        form = UpdateProfileForm(instance=user)
-        return render(
-            request,
-            "trombinoscope/update_profile.html",
-            {"form": form, "user": user},
-        )
+        elif form.errors:
+            print(form.errors)
+    return render(
+        request,
+        "trombinoscope/update_profile.html",
+        {"form": form, "user": user},
+    )
 
 
 class AlumniList(LoginRequiredMixin, ListView):

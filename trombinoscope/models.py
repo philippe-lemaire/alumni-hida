@@ -3,6 +3,8 @@ from django.core import validators
 from phonenumber_field.modelfields import PhoneNumberField
 import datetime
 import uuid
+from file_validator.models import DjangoFileValidator
+
 
 # Create your models here.
 from django.contrib.auth.models import AbstractUser, BaseUserManager
@@ -59,7 +61,26 @@ class CustomUser(AbstractUser):
     last_name = models.CharField("Nom de famille", max_length=100, blank=True)
     confirmed_account = models.BooleanField("compte confirmé", default=False)
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    photo = models.ImageField(blank=True, upload_to="photos/")
+    photo = models.ImageField(
+        blank=True,
+        upload_to="photos/",
+        validators=[
+            DjangoFileValidator(
+                libraries=[
+                    "python_magic",
+                    "filetype",
+                ],  # => validation operations will be performed with python-magic and filetype libraries
+                acceptable_mimes=[
+                    "image/png",
+                    "image/jpeg",
+                    "image/jpg",
+                    "image/webp",
+                ],  # => The mimes you want the file to be checked based on.
+                acceptable_types=["image"],
+                max_upload_file_size=5242880,
+            )
+        ],  # => 5 MB
+    )
     bac_year = models.PositiveIntegerField(
         "Année du bac",
         default=datetime.date.today().year,

@@ -7,3 +7,4 @@ crispy-bootstrap4
 Pillow
 django-phonenumber-field[phonenumbers]
 gunicorn
+file-validator
