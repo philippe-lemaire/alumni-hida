@@ -3,21 +3,24 @@
 {% block title %}[STAFF] Modifier un profil{% endblock title %}
 {% block content %}
 <h1>Mettre à jour le profil</h1>
-<div class='card'>
-    <div class="card-body">
-        <form action="{% url 'trombinoscope:staff_edit_profile' id %}" method="post" enctype='multipart/form-data'>
-            {% csrf_token %}
-
-            {{ form|crispy }}
-
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12 text-right">
-                        <button class="btn btn-warning btn-lg" type="submit">Mettre à jour</button>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
+<div class="alert alert-danger">
+<p>Vous avez accès à cette page car vous êtes idenfié·e comme un membre de l’équipe de ce site.</p>
+<p>Ici vous pouvez modifier le profil d’un ancien élève inscrit. Avec de grands pouvoirs viennent de grandes responsabilités.</p>
+<p>Pour désactiver totalement un compte utilisateur, passez par <a href="{% url 'admin:index' %}">l’interface d’administration de django</a>.
 </div>
+
+<form action="{% url 'trombinoscope:staff_edit_profile' id %}" method="post" enctype='multipart/form-data'>
+    {% csrf_token %}
+
+    {{ form|crispy }}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-right">
+                <button class="btn btn-warning btn-lg" type="submit">Mettre à jour</button>
+            </div>
+        </div>
+    </div>
+</form>
+
 {% endblock %}
