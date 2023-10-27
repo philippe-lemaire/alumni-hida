@@ -43,7 +43,7 @@ def contact_view(request):
             email = EmailMessage(
                 subject="Formulaire de contact du site annuaire HIDA",
                 body=f"De : {form_user_email}\n\n{message}",
-                from_email="from@example.com",
+                from_email=settings.EMAIL_FROM,
                 to=[settings.CONTACT_EMAIL],
                 reply_to=[form_user_email],
             )
