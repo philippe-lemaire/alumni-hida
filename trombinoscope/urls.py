@@ -18,4 +18,12 @@ urlpatterns = [
     ),
     path("set_password/<id>/", views.password_set_view, name="set_password"),
     path("contact", views.contact_view, name="contact"),
+    path(
+        "effacer-mon-profil", views.pre_delete_profile_view, name="pre_delete_profile"
+    ),
+    path(
+        "effacer-mon-profil/confirmation",
+        views.delete_profile_view,
+        name="delete_profile",
+    ),
 ]

@@ -176,6 +176,19 @@ def update_profile_view(request):
     )
 
 
+def pre_delete_profile_view(request):
+    template_name = "trombinoscope/pre_delete_profile.html"
+    context = {}
+    return render(request, template_name, context)
+
+
+def delete_profile_view(request):
+    user = request.user
+    user.delete()
+    messages.success(request, message="Votre profil a été supprimé.")
+    return HttpResponseRedirect("/")
+
+
 class AlumniList(LoginRequiredMixin, ListView):
     paginate_by = 9
     context_object_name = "alumni"

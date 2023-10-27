@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}Effacer mon profil{% endblock title %}
+{% block content %}
+
+<h1>Effacer mon profil</h1>
+
+<p>Vous êtes sur le point d’effacer votre profil</p>
+
+<p>Après avoir effacé votre profil, si vous souhaitez finalement réapparaître dans cet annuaire, vous devrez demander une nouvelle invitation à l'équipe enseignante.</p>
+
+<p>Êtes-vous sûr·e ?</p>
+
+<a href="/" class="m-2 btn btn-secondary active"
+role="button"
+aria-pressed="true">Annuler</a>
+
+<a href="{% url 'trombinoscope:delete_profile' %}" class="m-2 btn btn-danger active"
+role="button"
+aria-pressed="true">Supprimer mon compte</a>
+
+
+{% endblock %}
