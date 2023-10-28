@@ -56,7 +56,11 @@ class SearchForm(forms.Form):
             "search_term",
         )
         self.helper.add_input(
-            Submit("submit", "Chercher", css_class="m-1 btn-secondary")
+            Submit(
+                "submit",
+                "Chercher",
+                css_class="m-1 btn-secondary",
+            )
         )
 
 
