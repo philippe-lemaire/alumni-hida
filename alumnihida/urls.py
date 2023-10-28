@@ -29,6 +29,7 @@ urlpatterns = [
         TemplateView.as_view(template_name="mentions_legales.html"),
         name="mentions-legales",
     ),
+    path("captcha/", include("captcha.urls")),
 ]
 
 if settings.DEBUG:

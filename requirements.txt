@@ -8,3 +8,4 @@ Pillow
 django-phonenumber-field[phonenumbers]
 gunicorn
 file-validator
+django-simple-captcha

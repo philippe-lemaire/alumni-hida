@@ -4,6 +4,7 @@ from django.forms import ModelForm
 from .models import CustomUser
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout
+from captcha.fields import CaptchaField
 
 
 class NewAlumniForm(forms.Form):
@@ -69,3 +70,4 @@ class ContactForm(forms.Form):
     message = forms.CharField(
         label="Votre message :", max_length=200, widget=forms.Textarea()
     )
+    captcha = CaptchaField()
