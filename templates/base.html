@@ -55,7 +55,16 @@
                         Inviter des utilisateurs
                     </a>
               </ul>
+            {% else %}
+            {% if user.is_authenticated %}
+                <ul class="navbar-nav my-2 my-lg-0">
+                    <li class="nav-item">
+                       <a class="nav-link" href="{% url 'trombinoscope:update_profile' %}">Compléter mon profil</a>
+                    </li>
+                </ul>
             {% endif %}
+            {% endif %}
+
 
              <!-- login part of the navbar-->
             <ul class="navbar-nav my-2 my-lg-0">
