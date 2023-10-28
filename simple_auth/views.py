@@ -47,14 +47,14 @@ class PasswordChangeView(auth_views.PasswordChangeView):
 
 def password_reset_view(request):
     template_name = "simple_auth/reset-password.html"
+    form = PasswordResetForm(request.POST or None)
     if request.method == "POST":
-        form = PasswordResetForm(request.POST)
         if form.is_valid():
             # check if there is a user with this email
             email = form.cleaned_data["email"]
             try:
                 user = CustomUser.objects.get(email=email)
-
+                print(user)
                 uri = request.build_absolute_uri(
                     reverse(
                         "trombinoscope:set_password",
@@ -65,7 +65,7 @@ def password_reset_view(request):
                 send_mail(
                     subject="Réinitialisation de mot de passe sur le trombinoscope des élèves HIDA du Lycée Public de Saint-Just",
                     message=f"Vous avez demandé à réinitialiser votre mot de passe sur le trombinoscope des élèves HIDA du Lycée Public de Saint-Just.\nVoici le lien pour modifier votre mot de passe {uri}. ",
-                    from_email="from@example.com",
+                    from_email=settings.EMAIL_FROM,
                     recipient_list=[email],
                     fail_silently=False,
                 )
@@ -73,13 +73,11 @@ def password_reset_view(request):
                 return HttpResponseRedirect("/")
 
             # if not, write a message and redirect to this same url in get
-            except:
+            except CustomUser.DoesNotExist:
                 messages.warning(request, "Aucun compte enregistré avec cet email.")
-                return render(request, template_name, {"form": form})
-    else:
-        form = PasswordResetForm()
-        context = {"form": form}
-        return render(request, template_name, context)
+
+    context = {"form": form}
+    return render(request, template_name, context)
 
 
 class PasswordResetConfirmView(auth_views.PasswordResetConfirmView):
