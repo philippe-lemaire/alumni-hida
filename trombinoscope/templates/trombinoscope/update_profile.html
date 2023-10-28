@@ -3,10 +3,12 @@
 {% block title %}Compléter profil{% endblock title %}
 {% block content %}
 <h1>Compléter le profil</h1>
+<div class="alert alert-info">
 <p>Merci de compléter votre profil dans ce formulaire.</p>
 <p>Les informations de contact (email, téléphone, instagram, linkedin) <b>ne sont pas</b> obligatoires.<br>Si vous les remplissez, elles ne seront pas indexées par les moteurs de recherche car ce site n’est pas accessible aux robots 🤖.
 <br>L'adresse email de votre compte (privée) et votre adresse email de contact (publique pour les autres anciens élèves) peuvent être différentes.</p>
-<hr>
+</div>
+
 <form action="{% url 'trombinoscope:update_profile' %}" method="post" enctype='multipart/form-data'>
     {% csrf_token %}
      {{ form|crispy }}
