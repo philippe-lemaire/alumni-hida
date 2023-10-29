@@ -144,7 +144,7 @@ def password_set_view(request, id):
             messages.success(
                 request, "Vous êtes identifié·e. Pensez à compléter votre profil."
             )
-            return HttpResponseRedirect("/")
+            return HttpResponseRedirect(reverse("trombinoscope:update_profile"))
     else:
         form = PasswordSetForm()
         return render(
