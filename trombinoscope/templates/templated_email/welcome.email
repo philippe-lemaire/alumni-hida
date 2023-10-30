@@ -4,7 +4,8 @@ Bonjour,
 
 Un·e enseignant·e HIDA vous a invité·e à rejoindre le trombinoscope des ancien·nes élèves, alumni-hida.org.
 
-Voici le lien pour confirmer votre compte et compléter votre profil : {{uri}}.
+Voici le lien pour confirmer votre compte et compléter votre profil : {{uri}}
+
 
 Merci et à bientôt,
 ---
@@ -13,7 +14,7 @@ L'équipe de alumni-hida.org
 
 {% block html %}
 <p>Bonjour,
-<br>
+<br><br>
 Un·e enseignant·e HIDA vous a invité·e à rejoindre le trombinoscope des ancien·nes élèves, alumni-hida.org.
 <br>
 Voici le <a href="{{uri}}" target="_blank">lien pour confirmer votre compte et compléter votre profil</a>.
