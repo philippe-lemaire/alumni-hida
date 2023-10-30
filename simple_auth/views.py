@@ -6,7 +6,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import views as auth_views
 from trombinoscope.models import CustomUser
 from django.urls import reverse
-from django.core.mail import send_mail
+from templated_email import send_templated_mail
 from django.http import HttpResponseRedirect
 from django.conf import settings
 
@@ -61,14 +61,14 @@ def password_reset_view(request):
                         args=(str(user.id),),
                     )
                 )
-                # send mail to user
-                send_mail(
-                    subject="Réinitialisation de mot de passe sur le trombinoscope des élèves HIDA du Lycée Public de Saint-Just",
-                    message=f"Vous avez demandé à réinitialiser votre mot de passe sur le trombinoscope des élèves HIDA du Lycée Public de Saint-Just.\nVoici le lien pour modifier votre mot de passe {uri}. ",
+                # send mail with templated-email
+                send_templated_mail(
+                    template_name="reset_password_mail",
                     from_email=settings.EMAIL_FROM,
                     recipient_list=[email],
-                    fail_silently=False,
+                    context={"uri": uri},
                 )
+
                 messages.success(request, "Email envoyé")
                 return HttpResponseRedirect("/")
 

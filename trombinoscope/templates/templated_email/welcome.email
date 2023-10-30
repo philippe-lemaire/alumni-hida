@@ -1,0 +1,30 @@
+{% block subject %}Vous avez été invité·e à rejoindre le trombinoscope des anciens élèves HIDA du Lycée Public de Saint-Just{% endblock %}
+{% block plain %}
+Bonjour,
+
+Un·e enseignant·e HIDA vous a invité·e à rejoindre le trombinoscope des ancien·nes élèves, alumni-hida.org.
+
+Voici le lien pour confirmer votre compte et compléter votre profil : {{uri}}.
+
+Merci et à bientôt,
+---
+L'équipe de alumni-hida.org
+{% endblock %}
+
+{% block html %}
+<p>Bonjour,
+<br>
+Un·e enseignant·e HIDA vous a invité·e à rejoindre le trombinoscope des ancien·nes élèves, alumni-hida.org.
+<br>
+Voici le <a href="{{uri}}" target="_blank">lien pour confirmer votre compte et compléter votre profil</a>.
+<br>
+Si jamais vous ne pouvez cliquer sur ce lien, vous pouvez recopier cette adresse dans votre navigateur :
+<br>
+<br>
+{{uri}}
+<br>
+<br>
+Merci et à bientôt,</p>
+---
+<p>L'équipe de alumni-hida.org</p>
+{% endblock %}

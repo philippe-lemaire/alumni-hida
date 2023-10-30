@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.contrib import messages
 from django.http import HttpResponseRedirect
-from django.core.mail import send_mail
+from templated_email import send_templated_mail
 from django.urls import reverse
 from django.contrib.auth import login
 from django.conf import settings
@@ -111,13 +111,13 @@ def invite_users_view(request):
                             args=(str(user.id),),
                         )
                     )
-                    # send mail to user
-                    send_mail(
-                        subject="Vous avez été invité·e à rejoindre le trombinoscope des anciens élèves HIDA du Lycée Public de Saint-Just",
-                        message=f"Bonjour. Un·e enseignant·e HIDA vous a invité à rejoindre le trombinoscope des anciens élèves. Voici le lien pour confirmer votre compte et compléter votre profil : {uri}. ",
+                    # send mail with templated email
+
+                    send_templated_mail(
+                        template_name="welcome",
                         from_email=settings.EMAIL_FROM,
                         recipient_list=[email],
-                        fail_silently=False,
+                        context={"uri": uri},
                     )
 
                     counter += 1
