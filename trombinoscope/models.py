@@ -4,7 +4,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 import datetime
 import uuid
 from file_validator.models import DjangoFileValidator
-
+from tinymce.models import HTMLField
 
 # Create your models here.
 from django.contrib.auth.models import AbstractUser, BaseUserManager
@@ -98,8 +98,8 @@ class CustomUser(AbstractUser):
     )
     # looking_for_internship = models.BooleanField("En recherche de stage", default=False)
     # enseignant_hida = models.BooleanField(default=False)
-    post_bac = models.TextField("Études après le Bac", max_length=1000, blank=True)
-    occupation = models.TextField("Emploi", max_length=1000, blank=True)
+    post_bac = HTMLField("Études après le Bac", max_length=1000, blank=True)
+    occupation = HTMLField("Emploi", max_length=1000, blank=True)
     contact_info_instagram = models.URLField("Adresse compte instagram", blank=True)
     contact_info_email = models.EmailField(
         "Adresse email de contact",

@@ -5,6 +5,7 @@ from .models import CustomUser
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout
 from captcha.fields import CaptchaField
+from tinymce.widgets import TinyMCE
 
 
 class NewAlumniForm(forms.Form):
@@ -34,6 +35,7 @@ class UpdateProfileForm(ModelForm):
             "contact_info_linkedin",
             "contact_info_tel",
         ]
+        widgets = {"content": TinyMCE(attrs={"cols": 80, "rows": 30})}
 
 
 class PasswordSetForm(forms.Form):

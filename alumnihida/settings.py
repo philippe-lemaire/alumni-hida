@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     "crispy_bootstrap4",
     "phonenumber_field",
     "captcha",
+    "tinymce",
     # local apps
     "trombinoscope",
     "simple_auth",

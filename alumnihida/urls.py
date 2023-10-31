@@ -30,6 +30,7 @@ urlpatterns = [
         name="mentions-legales",
     ),
     path("captcha/", include("captcha.urls")),
+    path("tinymce/", include("tinymce.urls")),
 ]
 
 if settings.DEBUG:
