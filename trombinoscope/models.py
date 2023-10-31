@@ -107,3 +107,6 @@ class CustomUser(AbstractUser):
     )
     contact_info_linkedin = models.URLField("Adresse profil linkedin", blank=True)
     contact_info_tel = PhoneNumberField("Numéro de téléphone", blank=True, region="FR")
+
+    class Meta:
+        ordering = ["last_name", "first_name"]
