@@ -14,7 +14,7 @@
     <div class="row">
 
 {% for alumnus in alumni %}
-
+{% if alumnus.first_name %}
 <div class="card m-4" style="width: 18rem;">
   {% if alumnus.photo %}
     <img class="card-img-top" src="{% get_media_prefix %}{{alumnus.photo}}" alt="Portrait de {{ alumnus.first_name }} {{ alumnus.last_name }}">
@@ -55,6 +55,7 @@
     {% endif %}
   </div>
 </div>
+{% endif %}
 {% endfor %}
     </div>
 </div>
