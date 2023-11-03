@@ -188,11 +188,14 @@ def delete_profile_view(request):
 
 
 class AlumniList(LoginRequiredMixin, ListView):
-    paginate_by = 6
     context_object_name = "alumni"
-    queryset = CustomUser.objects.filter(confirmed_account=True, is_staff=False)
+    model = CustomUser
+    paginate_by = 10
     template_name = "trombinoscope/alumni_list.html"
     login_url = settings.LOGIN_URL
+
+    def get_queryset(self):
+        return super().get_queryset().filter(confirmed_account=True, is_staff=False)
 
     def get_context_data(self, **kwargs):
         context = super(ListView, self).get_context_data(**kwargs)
