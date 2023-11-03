@@ -196,7 +196,7 @@ class AlumniList(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super(ListView, self).get_context_data(**kwargs)
-        context["search_form"] = SearchForm(self.request.GET or None)
+        context["search_form"] = SearchForm()
         return context
 
 
