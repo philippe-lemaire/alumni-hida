@@ -29,16 +29,15 @@
         <span class="badge badge-pill badge-info">Recherche un stage</span>
     {% endif %}
     {% if alumnus.post_bac %}
-    <h6 class="card-text">Études :</h6>
+
     <details class="mb-4">
-        <summary>Voir</summary>
+        <summary class="card-link"><b>Études</b></summary>
         <p>{{alumnus.post_bac|safe}}</p>
     </details>
     {% endif %}
     {% if alumnus.occupation %}
-    <h6 class="card-text">Emploi :</h6>
      <details class="mb-4">
-        <summary>Voir</summary>
+        <summary class="card-link"><b>Emplois</b></summary>
     <p>{{alumnus.occupation|safe}}</p>
     </details>
     {% endif %}
