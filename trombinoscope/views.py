@@ -190,7 +190,7 @@ def delete_profile_view(request):
 class AlumniList(LoginRequiredMixin, ListView):
     context_object_name = "alumni"
     model = CustomUser
-    paginate_by = 10
+    paginate_by = 9
     template_name = "trombinoscope/alumni_list.html"
     login_url = settings.LOGIN_URL
 
