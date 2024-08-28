@@ -11,6 +11,7 @@ from django.contrib.auth import login
 from django.conf import settings
 from django.db.models import Q
 from django.core.mail import EmailMessage
+from time import sleep
 
 
 from .forms import (
@@ -121,6 +122,11 @@ def invite_users_view(request):
                     )
 
                     counter += 1
+
+                    # sleep 5 seconds every 2 emails
+                    # to avoid having the smtp server shut down the connection
+                    if counter % 2 == 0:
+                        sleep(5)
             messages.success(request, f"{counter} anciens élèves invités")
 
         return HttpResponseRedirect("/")
