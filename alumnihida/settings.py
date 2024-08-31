@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
+
 import environ
 import os
 from pathlib import Path
@@ -156,11 +157,11 @@ FILE_UPLOAD_HANDLERS = [
 ]
 FILE_VALIDATOR_ERROR_MESSAGE = "{current_file_name} n’est pas valide, la taille du fichier ne doit pas dépasser 5 Mo."
 # for email sending
-EMAIL_HOST = os.getenv("ELASTIC_HOST")
-EMAIL_PORT = os.getenv("ELASTIC_PORT")
-EMAIL_HOST_USER = os.getenv("ELASTIC_HOST_USER")
-EMAIL_HOST_PASSWORD = os.getenv("ELASTIC_HOST_PASSWORD")
+EMAIL_HOST = os.getenv("MAILJET_HOST")
+EMAIL_PORT = os.getenv("MAILJET_PORT")
+EMAIL_HOST_USER = os.getenv("MAILJET_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("MAILJET_HOST_PASSWORD")
 EMAIL_USE_TLS = True
 CONTACT_EMAIL = os.getenv("EMAIL_CONTACT")
-EMAIL_FROM = os.getenv("ELASTIC_FROM")
+EMAIL_FROM = os.getenv("MAILJET_FROM")
 LOGIN_URL = "authentification/identification"
