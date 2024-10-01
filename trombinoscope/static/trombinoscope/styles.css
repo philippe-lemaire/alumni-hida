@@ -38,3 +38,9 @@ body>.container {
 code {
     font-size: 80%;
 }
+
+.portrait {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
