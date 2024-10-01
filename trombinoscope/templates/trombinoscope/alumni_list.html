@@ -40,14 +40,15 @@
      <a target="_blank" href="{{alumnus.contact_info_linkedin}}"><img src="{% static 'trombinoscope/icons/linkedin.png' %}" alt="Logo Linkedin"></a>
     {% endif %}
     </p>
-    <p>
+
+    <ul class="list-inline">
     {% if alumnus.contact_info_email %}
-    <img src="{% static 'trombinoscope/icons/envelope.png' %}" alt="Logo Enveloppe"> <a href="mailto:{{alumnus.contact_info_email}}">{{alumnus.contact_info_email}}</a>
+    <li class="list-inline-item"><a href="mailto:{{alumnus.contact_info_email}}">{{alumnus.contact_info_email}}</a></li>
     {% endif %}
     {% if alumnus.contact_info_tel %}
-    <img src="{% static 'trombinoscope/icons/smartphone.png' %}" alt="Logo Smartphone"> {{ alumnus.contact_info_tel }}
+    <li class="list-inline-item">{{ alumnus.contact_info_tel }}</li>
     {% endif %}
-    </p>
+    </ul>
     {% if user.is_staff %}
     <p>
         <a href="{% url 'trombinoscope:staff_edit_profile' alumnus.id %}"
