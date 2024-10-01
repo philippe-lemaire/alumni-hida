@@ -68,6 +68,7 @@
 </div>
 
 {% if page_obj.paginator.num_pages > 1 %}
+
 <nav aria-label="Page navigation example">
   <ul class="pagination">
     {% if page_obj.has_previous %}
@@ -78,7 +79,15 @@
     </li>
     {% endif %}
     {% for _ in ''|ljust:page_obj.paginator.num_pages %}
-    <a class="page-link" href="?page={{ forloop.counter }}">{{ forloop.counter }}</a>
+
+      {% if page_obj.number == forloop.counter %}
+      <li class="page-item active">
+      <a class="page-link" href="?page={{ forloop.counter }}">{{ forloop.counter }} <span class="sr-only">(current)</span></a>
+      {% else %}
+      <li class="page-item">
+      <a class="page-link" href="?page={{ forloop.counter }}">{{ forloop.counter }}</a>
+      {% endif %}
+    </li>
     {% endfor %}
 
 
