@@ -39,6 +39,8 @@
     {% if alumnus.contact_info_linkedin %}
      <a target="_blank" href="{{alumnus.contact_info_linkedin}}"><img src="{% static 'trombinoscope/icons/linkedin.png' %}" alt="Logo Linkedin"></a>
     {% endif %}
+    </p>
+    <p>
     {% if alumnus.contact_info_email %}
     <img src="{% static 'trombinoscope/icons/envelope.png' %}" alt="Logo Enveloppe"> <a href="mailto:{{alumnus.contact_info_email}}">{{alumnus.contact_info_email}}</a>
     {% endif %}
