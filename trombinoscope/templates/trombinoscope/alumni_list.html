@@ -13,7 +13,7 @@
 {% if alumnus.first_name %}
 <!-- test new card-->
 <div class="card mb-4">
-  <h5 class="card-header">{{alumnus.first_name}} {{alumnus.last_name}}</h5>
+  <h5 class="card-header">{{alumnus.first_name|title}} {{alumnus.last_name|upper}}</h5>
   <div class="card-body">
     <!-- image -->
     {% if alumnus.photo %}
