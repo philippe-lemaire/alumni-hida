@@ -50,11 +50,9 @@
     {% endif %}
     </ul>
     {% if user.is_staff %}
-    <p>
-        <a href="{% url 'trombinoscope:staff_edit_profile' alumnus.id %}"
-        class="btn btn-secondary btn-sm active" role="button"
-        aria-pressed="true">Staff : Modifier ce profil</a>
-    </p>
+    <div class="float-right">
+      <a href="{% url 'trombinoscope:staff_edit_profile' alumnus.id %}">✏</a>
+    </div>
     {% endif %}
   </div>
 </div>
