@@ -16,7 +16,7 @@ gunicorn==21.2.0
 humanize==4.4.0
 packaging==23.2
 phonenumbers==8.13.19
-Pillow==10.0.0
+Pillow
 puremagic==1.14
 python-dotenv==0.21.1
 python-magic==0.4.27
