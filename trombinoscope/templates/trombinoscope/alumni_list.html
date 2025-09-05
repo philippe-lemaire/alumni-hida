@@ -10,15 +10,23 @@
 <div class="container">
 
 <!-- years -->
+<p>
+  <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    Filtrer par année de Bac
+  </a>
 
-<span>Filtrer par année de Bac</span>
-<ul class="pagination">
+</p>
+<div class="collapse" id="collapseExample">
+  <div class="card card-body">
+   <nav class="nav flex-column flex-sm-row">
+      <a class="text-sm-center nav-link" href="{% url 'trombinoscope:alumni_list' %}">Toutes</a>
   {% for year in years %}
-  <li class="page-item">
-  <a class="page-link" href="{% url 'trombinoscope:alumni_list_per_year' year %}">{{year}}</a>
-  </li>
+  <a class="text-sm-center nav-link" href="{% url 'trombinoscope:alumni_list_per_year' year %}">{{year}}</a>
   {% endfor %}
-</ul>
+</nav>
+  </div>
+</div>
+
 
 {% for alumnus in alumni %}
 
