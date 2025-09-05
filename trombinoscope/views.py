@@ -210,6 +210,17 @@ class AlumniList(LoginRequiredMixin, ListView):
 
 
 @login_required
+def alumni_list_per_year(request, year):
+    alumni = CustomUser.objects.filter(
+        confirmed_account=True, is_staff=False, bac_year=year
+    )
+    template_name = "trombinoscope/alumni_list.html"
+    context = {"alumni": alumni, "search_form": SearchForm()}
+
+    return render(request, template_name=template_name, context=context)
+
+
+@login_required
 def alumni_search_result(request):
     if request.method == "POST":
         form = SearchForm(request.POST)

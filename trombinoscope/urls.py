@@ -9,6 +9,7 @@ urlpatterns = [
     path("", views.IndexView.as_view(), name="index"),
     path("invite_users", views.invite_users_view, name="invite_users"),
     path("alumni", views.AlumniList.as_view(), name="alumni_list"),
+    path("alumni/<int:year>", views.alumni_list_per_year, name="alumni_list_per_year"),
     path("alumni/search_result", views.alumni_search_result, name="search"),
     path("update_profile", views.update_profile_view, name="update_profile"),
     path(
