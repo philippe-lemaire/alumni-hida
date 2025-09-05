@@ -206,6 +206,10 @@ class AlumniList(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super(ListView, self).get_context_data(**kwargs)
         context["search_form"] = SearchForm()
+
+        context["years"] = sorted(
+            list(set(CustomUser.objects.values_list("bac_year", flat=True)))
+        )
         return context
 
 
@@ -216,7 +220,9 @@ def alumni_list_per_year(request, year):
     )
     template_name = "trombinoscope/alumni_list.html"
     context = {"alumni": alumni, "search_form": SearchForm()}
-
+    context["years"] = sorted(
+        list(set(CustomUser.objects.values_list("bac_year", flat=True)))
+    )
     return render(request, template_name=template_name, context=context)
 
 
